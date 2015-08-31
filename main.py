@@ -62,8 +62,24 @@ class Window(pyglet.window.Window):
             vsync=VSYNC
         )
 
+        self.simulation = None
+
+    def on_key_press(self, symbol, modifiers):
+        k = pyglet.window.key
+        if self.simulation:
+            if symbol == k.ENTER:
+                self.simulation.start()
+            if symbol == k.NUM_ADD:
+                self.simulation.increment()
+            if symbol == k.A:
+                self.simulation.environment.create_ant()
+        if symbol == k.ESCAPE:
+            pyglet.app.exit()
+
     def render(self, dt):
         self.clear()
+        if self.simulation:
+            self.simulation.render()
 
 
 # Running application
@@ -74,5 +90,6 @@ if __name__ == "__main__":
     pyglet.clock.schedule_interval(w.render, 1.0 / FPS)
     logger.info("Initializing simulation.")
     s = simulation.Simulation(w)
+    w.simulation = s
     logger.info("Running app...")
     pyglet.app.run()

@@ -2,6 +2,7 @@ import unittest
 
 import ant
 import environment
+import simulation
 
 tcase = unittest.TestCase
 
@@ -433,6 +434,14 @@ class TestTiles(tcase):
         self.assertTrue(env.check_if_occupied(t))
         t = env.tiles[0][1]
         self.assertFalse(env.check_if_occupied(t))
+
+
+class TestSimulation(tcase):
+
+    def test_create_simulation(self):
+        s = simulation.Simulation()
+        self.assertIsInstance(s, simulation.Simulation)
+
 
 if __name__ == '__main__':
     unittest.main()
