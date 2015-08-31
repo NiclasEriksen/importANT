@@ -3,10 +3,6 @@ This is a simulated ant colony, in which we generate an environment for agents
 to roam in, gather food, grow and expand.
 """
 
-# Importing the logic needed to simulate ants and their environment
-from environment import *
-from ant import *
-
 # Modules needed to run the simulation
 import pyglet
 import logging
@@ -36,6 +32,9 @@ ch = logging.StreamHandler()
 ch.setLevel(logging.INFO)
 logger.addHandler(ch)
 logger.setLevel(logging.DEBUG)
+
+# Importing simulation module, needs to be after logging setup
+import simulation
 
 
 class Window(pyglet.window.Window):
@@ -67,17 +66,13 @@ class Window(pyglet.window.Window):
         self.clear()
 
 
-class Simulation:
-
-    def __init__(self):
-        pass
-
-
 # Running application
 if __name__ == "__main__":
     logger.info("Spawning main window.")
     w = Window()
     logger.debug("Scheduling render function on main window")
     pyglet.clock.schedule_interval(w.render, 1.0 / FPS)
-    logger.info("Running app.")
+    logger.info("Initializing simulation.")
+    s = simulation.Simulation(w)
+    logger.info("Running app...")
     pyglet.app.run()
