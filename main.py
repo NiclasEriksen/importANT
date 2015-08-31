@@ -67,6 +67,12 @@ class Window(pyglet.window.Window):
         self.clear()
 
 
+class Simulation:
+
+    def __init__(self):
+        pass
+
+
 # Running application
 if __name__ == "__main__":
     logger.info("Spawning main window.")
