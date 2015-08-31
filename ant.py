@@ -1,15 +1,24 @@
 import random
+from main import logger
+
+count = 0
+def get_id():
+    global count
+    count += 1
+    return count
+
 
 class WorkerAnt:
 
     """The main worker ant constructor, also acts as migrant constructor."""
 
     def __init__(self, father=None, mother=None, env=False):
-        # Set random genetic properties
         self.env = env
         if mother and father:
+            # Inherit from parents
             self.crossover(mother, father)
         else:
+            # Set random genetic properties
             self.alpha = random.uniform(-5, 5)  # Pheromone sensibility
             self.beta = random.uniform(-5, 5)   # ?
             self.gamma = random.uniform(-5, 5)  # ?
@@ -27,8 +36,11 @@ class WorkerAnt:
         self.coordinates = (0, 0)
         self.random_chance = 20
         self.random_chance = 100 / self.random_chance
+        self.id = get_id()
+        logger.debug("Spawning worker ant {0}.".format(self.id))
 
     def crossover(self, m, f):
+        logger.debug
         if random.getrandbits(1):
             a = m.alpha
         else:
@@ -167,6 +179,11 @@ class WorkerAnt:
         new_pos = (
             self.coordinates[0] + self.direction[0],
             self.coordinates[1] + self.direction[1]
+        )
+        logger.debug(
+            "Ant {0} moved from pos {1} to pos {2}".format(
+                self.id, self.coordinates, new_pos
+            )
         )
         self.coordinates = new_pos
 

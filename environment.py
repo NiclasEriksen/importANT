@@ -1,4 +1,4 @@
-from ant import WorkerAnt
+import ant
 
 
 class Environment:
@@ -26,8 +26,8 @@ class Environment:
         self.tiles[x][y] = tile
 
     def create_ant(self, mother=None, father=None):
-        ant = WorkerAnt(mother, father, self)
-        self.ants.append(ant)
+        a = ant.WorkerAnt(mother, father, self)
+        self.ants.append(a)
 
     def remove_ant(self, ant):
         try:

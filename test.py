@@ -319,6 +319,16 @@ class TestCreateAnt(tcase):
         ant.search_home(random_choice=True)
         self.assertNotEqual(ant.coordinates, old_dir)
 
+    def test_generate_id(self):
+        a1 = ant.WorkerAnt()
+        a2 = ant.WorkerAnt()
+        a3 = ant.WorkerAnt()
+        a1.id = ant.get_id()
+        a2.id = ant.get_id()
+        a3.id = ant.get_id()
+        l = [a1.id, a2.id, a3.id]
+        self.assertFalse(len(l)!=len(set(l)))
+
 
 class TestNaturalSelection(tcase):
 
